@@ -1,0 +1,49 @@
+MAINLIB = /usr/lib
+HDRDIR = cc/hd
+SRCDIR = cc/mth
+OBJDIR = obj
+BINDIR = .
+DEFS =
+LIBDIR = -L$(MAINLIB)
+
+DEPDIR := .d
+$(shell mkdir -p $(DEPDIR) >/dev/null)
+DEPFLAGS = -MT $@ -MMD -MP -MF $(DEPDIR)/$*.Td
+
+CC = g++
+INCS = -I$(HDRDIR)
+CFLAGS = $(INCS) $(DEFS) -ggdb -O3
+# -Werror  -Wall
+
+COMPILE.cc = $(CC) $(DEPFLAGS) $(CFLAGS) -c
+POSTCOMPILE = mv -f $(DEPDIR)/$*.Td $(DEPDIR)/$*.d
+
+OBJS =	$(OBJDIR)/nr_ut.o \
+	$(OBJDIR)/utility.o \
+	$(OBJDIR)/maths.o \
+	$(OBJDIR)/blitz_array_aux.o \
+	$(OBJDIR)/jtc.o \
+	$(OBJDIR)/jtc_exp.o \
+	$(OBJDIR)/jtc_em.o \
+	$(OBJDIR)/generate_data.o
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.cc
+$(OBJDIR)/%.o : $(SRCDIR)/%.cc $(DEPDIR)/%.d
+	        $(COMPILE.cc) -o $(OBJDIR)/$*.o $<
+			$(POSTCOMPILE)
+
+all: $(BINDIR)/generate_data
+
+$(BINDIR)/generate_data: $(OBJS)
+	$(CC) $(LIBDIR) $(OBJS) $(DEPFLAGS) -static -lgsl -lgslcblas -lblitz -O3 -lm -o $(BINDIR)/generate_data
+
+clean:
+	-rm -f $(BINDIR)/generate_data
+	-rm -f $(OBJDIR)/*.o
+	-rm -f $(DEPDIR)/*.d
+	-rm -f core
+
+$(DEPDIR)/%.d: ;
+.PRECIOUS: $(DEPDIR)/%.d
+
+include $(wildcard $(patsubst $(OBJDIR)/%,$(DEPDIR)/%.d,$(basename $(OBJS))))

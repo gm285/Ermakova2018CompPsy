@@ -1,7 +1,3 @@
-# Ermakova2018CompPsy
-De-identified data and code for Ermakova, A. O., Gileadi, N., Knolle, F., Justicia, A., Anderson, R., Fletcher, P. C., Moutoussis, M., &amp; Murray, G. K. (2018). Cost evaluation during decision-making in patients at early stages of psychosis. Computational Psychiatry 2018
-
-
 This is a public repository for code & anonymised cognitive data for Ermakova, A. O., Gileadi, N., Knolle, F., Justicia, A., Anderson, R., Fletcher, P. C., Moutoussis, M., & Murray, G. K. (2018). Cost evaluation during decision-making in patients at early stages of psychosis. Computational Psychiatry. Advance Publication. https://doi.org/10.1162/cpsy_a_00020
 
 Our own code is provided under the GNU General Public License (GPL). 

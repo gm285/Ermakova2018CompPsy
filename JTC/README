@@ -1,0 +1,13 @@
+This directory contains code used for parameter estimation for the
+Jumping-to-Conclusions task.
+
+The code statically links two libraries, which are under the 'cc' directory: GSL
+2.4 (GNU Scientific Library), and Blitz++. Both are released under their own
+licenses, and are only provided in this repository to make compilation easy, and
+the resulting binary reproducible.
+
+GSL was obtained from:
+http://ftp.heanet.ie/mirrors/gnu/gsl/gsl-2.4.tar.gz
+
+Blitz++ was obtained from:
+https://codeload.github.com/blitzpp/blitz/legacy.tar.gz/1.0.1
